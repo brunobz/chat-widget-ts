@@ -11,7 +11,7 @@ A modern, accessible, embeddable chat widget built with React.
 ## 📦 Installation
 
 ```bash
-npm install @brunobz/chat-widget-ts
+npm install chat-widget-ts
 ```
 
 ---
