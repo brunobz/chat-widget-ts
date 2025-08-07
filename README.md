@@ -28,16 +28,6 @@ function App() {
 }
 ```
 
-### Basic Setup CommonJS
-
-```tsx
-const { ChatWidget } = require('chat-widget-ts')
-
-function App() {
-  return <ChatWidget />
-}
-```
-
 That’s it. The widget will appear as a floating button. When clicked, it opens the chat window.
 
 ---
@@ -91,9 +81,9 @@ chat-status
 
 ## Available values:
 
-- "online" (default)
-- "offline"
-- "maintenance"
+- online (default)
+- offline
+- maintenance
 
 ## Example (in browser console):
 
