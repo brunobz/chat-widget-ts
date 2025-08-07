@@ -1,28 +1,29 @@
 import React from 'react'
 import { styles } from './ChatStatus.styles'
+import { TChatStatus } from '@/hooks/useChatStatus/useChatStatus'
 
 interface ChatStatusProps {
-  isOnline: boolean
-  isMaintenance: boolean
+  status: TChatStatus
 }
 
 export const ChatStatus = ({
-  isOnline,
-  isMaintenance,
+  status,
   ...props
 }: React.ComponentPropsWithRef<'div'> & ChatStatusProps) => {
+  const isOnline = status === 'online'
+
   return (
     <div
       role="status"
       aria-live="polite"
       style={{
         ...styles.status,
-        color: isOnline && !isMaintenance ? 'green' : 'red',
-        backgroundColor: isOnline && !isMaintenance ? '#e6ffed' : '#ffe6e6',
+        color: isOnline ? 'green' : 'red',
+        backgroundColor: isOnline ? '#e6ffed' : '#ffe6e6',
       }}
       {...props}
     >
-      {isOnline && !isMaintenance ? 'Online' : 'Offline'}
+      {isOnline ? 'Online' : 'Offline'}
     </div>
   )
 }

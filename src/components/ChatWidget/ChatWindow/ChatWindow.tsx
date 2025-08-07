@@ -15,8 +15,7 @@ interface Message {
 
 interface ChatWindowProps {
   customStyle: CSSProperties
-  isOnline: boolean
-  isMaintenance: boolean
+  status: 'online' | 'offline' | 'maintenance'
   messages: Message[]
   onSendMessage: (msg: string) => void
   onClose: () => void
@@ -24,8 +23,7 @@ interface ChatWindowProps {
 
 export const ChatWindow: React.FC<ChatWindowProps> = ({
   customStyle,
-  isOnline,
-  isMaintenance,
+  status,
   messages,
   onSendMessage,
   onClose,
@@ -60,9 +58,9 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
         <ChatCloseButton onClose={onClose} />
       </header>
 
-      <ChatStatus isOnline={isOnline} isMaintenance={isMaintenance} />
+      <ChatStatus status={status} />
 
-      {isMaintenance && (
+      {status === 'maintenance' && (
         <ChatBanner message="Sorry! Service in maintenance mode." />
       )}
 
@@ -72,7 +70,7 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
       </main>
 
       <ChatForm
-        disabled={isMaintenance}
+        disabled={status === 'maintenance'}
         onSubmitForm={onSendMessage}
         style={customStyle}
       />

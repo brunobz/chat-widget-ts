@@ -16,15 +16,23 @@
   ],
   "scripts": {
     "lint": "eslint src --ext .ts,.tsx",
-    "format": "prettier --write src",
     "build": "vite build",
     "build:watch": "vite build --watch",
-    "test": "vitest",
-    "test:watch": "vitest --watch"
+    "test": "vitest"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "react",
+    "chat",
+    "widget",
+    "embeddable",
+    "accessible"
+  ],
+  "author": "Bruno Bianchini Zandavalle",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brunobz/chat-widget-ts"
+  },
   "peerDependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

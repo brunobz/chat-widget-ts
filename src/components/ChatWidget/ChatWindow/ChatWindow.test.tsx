@@ -7,8 +7,7 @@ describe('ChatWindow', () => {
     render(
       <ChatWindow
         customStyle={{}}
-        isMaintenance={false}
-        isOnline={false}
+        status="offline"
         messages={[]}
         onClose={vi.fn()}
         onSendMessage={vi.fn()}
@@ -22,8 +21,7 @@ describe('ChatWindow', () => {
     render(
       <ChatWindow
         customStyle={{}}
-        isMaintenance={true}
-        isOnline={false}
+        status="maintenance"
         messages={[]}
         onClose={vi.fn()}
         onSendMessage={vi.fn()}

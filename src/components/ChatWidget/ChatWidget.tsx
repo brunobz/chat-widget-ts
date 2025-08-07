@@ -5,21 +5,26 @@ import { useChatVisibility } from '@/hooks/useChatVisibility/useChatVisibility'
 import { FloatingButton } from '@/components/ui/FloatingButton/FloatingButton'
 import { ChatWindow } from './ChatWindow/ChatWindow'
 export interface ChatWidgetProps {
-  backgroundColor?: string
-  color?: string
-  containerStyle?: React.CSSProperties
-  icon?: React.ReactNode
+  styles: {
+    colors: {
+      color: string
+      backgroundColor: string
+    }
+    container?: React.CSSProperties
+    icon?: React.ReactNode
+  }
 }
 
-export const ChatWidget = ({
-  backgroundColor,
-  color,
-  containerStyle,
-  icon,
-}: ChatWidgetProps) => {
-  const { isOnline, isMaintenance } = useChatStatus()
+export const ChatWidget = ({ styles }: ChatWidgetProps) => {
+  const { status } = useChatStatus()
   const { messages, sendMessage } = useChatMessages()
   const { isOpen, toggle, close } = useChatVisibility()
+
+  const {
+    container,
+    colors: { color, backgroundColor },
+    icon,
+  } = styles
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
@@ -33,7 +38,7 @@ export const ChatWidget = ({
   }, [isOpen, close])
 
   return (
-    <div style={containerStyle}>
+    <div style={container}>
       <FloatingButton
         icon={icon}
         isOpen={isOpen}
@@ -43,9 +48,8 @@ export const ChatWidget = ({
 
       {isOpen && (
         <ChatWindow
-          customStyle={{ backgroundColor, color }}
-          isMaintenance={isMaintenance}
-          isOnline={isOnline}
+          customStyle={{ color, backgroundColor }}
+          status={status}
           messages={messages}
           onClose={close}
           onSendMessage={sendMessage}

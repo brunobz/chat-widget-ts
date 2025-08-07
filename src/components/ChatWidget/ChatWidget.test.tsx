@@ -51,8 +51,7 @@ describe('ChatWidget', () => {
     vi.clearAllMocks()
 
     mockUseChatStatus.mockReturnValue({
-      isOnline: true,
-      isMaintenance: false,
+      status: 'online',
     })
 
     mockUseChatMessages.mockReturnValue({
@@ -100,23 +99,6 @@ describe('ChatWidget', () => {
     render(<ChatWidget />)
     fireEvent.keyDown(window, { key: 'Escape', code: 'Escape' })
     expect(close).toHaveBeenCalled()
-  })
-
-  it('should not send message when in maintenance', () => {
-    mockUseChatVisibility.mockReturnValueOnce({
-      isOpen: true,
-      toggle,
-      close,
-    })
-
-    mockUseChatStatus.mockReturnValueOnce({
-      isOnline: true,
-      isMaintenance: true,
-    })
-
-    render(<ChatWidget />)
-    fireEvent.click(screen.getByLabelText('send'))
-    expect(sendMessage).not.toHaveBeenCalled()
   })
 
   it('should send message when not in maintenance and input is valid', () => {
