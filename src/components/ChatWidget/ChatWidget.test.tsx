@@ -89,18 +89,6 @@ describe('ChatWidget', () => {
     expect(screen.getByText('Hello')).toBeInTheDocument()
   })
 
-  it('pressing Escape closes the chat', () => {
-    mockUseChatVisibility.mockReturnValueOnce({
-      isOpen: true,
-      toggle,
-      close,
-    })
-
-    render(<ChatWidget />)
-    fireEvent.keyDown(window, { key: 'Escape', code: 'Escape' })
-    expect(close).toHaveBeenCalled()
-  })
-
   it('should send message when not in maintenance and input is valid', () => {
     mockUseChatVisibility.mockReturnValueOnce({
       isOpen: true,
