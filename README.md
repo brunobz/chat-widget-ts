@@ -79,19 +79,26 @@ They are restored on page reload. Great for prototyping and offline UX.
 
 ---
 
-## 🛠️ Mocked Chat Status (Online/Offline/Maintenance)
+## Simulating Chat Status (Dev Only)
 
-By default, the widget includes mocked status using the `useChatStatus` hook.
+You can simulate different chat statuses during development using the browser's localStorage. This is helpful for testing how the widget behaves in various scenarios (e.g. offline, maintenance).
 
-To control status manually (e.g., for testing):
+## Key:
 
-```ts
-vi.mock('@/hooks/useChatStatus', () => ({
-  useChatStatus: () => ({
-    status: 'online', // or 'offline' or 'maintenance'
-    isMaintenance: false,
-  }),
-}))
+```bash
+chat-status
+```
+
+## Available values:
+
+- "online" (default)
+- "offline"
+- "maintenance"
+
+## Example (in browser console):
+
+```js
+localStorage.setItem('chat-status', 'maintenance')
 ```
 
 ---

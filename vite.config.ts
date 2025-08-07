@@ -14,18 +14,12 @@ export default defineConfig({
     lib: {
       entry: 'src/index.ts',
       name: 'ChatWidget',
-      fileName: (format) => `index.${format}.js`,
-      formats: ['es', 'cjs'],
+      fileName: () => 'index.js',
+      formats: ['es'],
     },
     outDir: 'dist',
     rollupOptions: {
       external: ['react', 'react-dom'],
-      output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
-        },
-      },
     },
   },
   test: {

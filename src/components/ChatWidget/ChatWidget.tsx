@@ -6,9 +6,9 @@ import { FloatingButton } from '@/components/ui/FloatingButton/FloatingButton'
 import { ChatWindow } from './ChatWindow/ChatWindow'
 export interface ChatWidgetProps {
   styles?: {
-    colors: {
-      color: string
-      backgroundColor: string
+    colors?: {
+      color?: string
+      backgroundColor?: string
     }
     container?: React.CSSProperties
     icon?: React.ReactNode
@@ -38,16 +38,16 @@ export const ChatWidget = ({ styles }: ChatWidgetProps) => {
         isOpen={isOpen}
         toggle={toggle}
         style={{
-          color: styles?.colors.color,
-          backgroundColor: styles?.colors.backgroundColor,
+          color: styles?.colors?.color,
+          backgroundColor: styles?.colors?.backgroundColor,
         }}
       />
 
       {isOpen && (
         <ChatWindow
           customStyle={{
-            color: styles?.colors.color,
-            backgroundColor: styles?.colors.backgroundColor,
+            color: styles?.colors?.color,
+            backgroundColor: styles?.colors?.backgroundColor,
           }}
           status={status}
           messages={messages}
