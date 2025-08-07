@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react'
 import { useChatStatus } from '@/hooks/useChatStatus/useChatStatus'
 import { useChatMessages } from '@/hooks/useChatMessages/useChatMessages'
 import { useChatVisibility } from '@/hooks/useChatVisibility/useChatVisibility'
@@ -19,17 +18,6 @@ export const ChatWidget = ({ styles }: ChatWidgetProps) => {
   const { status } = useChatStatus()
   const { messages, sendMessage } = useChatMessages()
   const { isOpen, toggle, close } = useChatVisibility()
-
-  useEffect(() => {
-    function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === 'Escape' && isOpen) {
-        e.preventDefault()
-        close()
-      }
-    }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [isOpen, close])
 
   return (
     <div style={styles?.container}>
