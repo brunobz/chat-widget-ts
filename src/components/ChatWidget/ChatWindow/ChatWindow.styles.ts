@@ -10,6 +10,7 @@ export const styles = {
     borderRadius: '8px',
     display: 'flex',
     flexDirection: 'column',
+    zIndex: 999,
   } as React.CSSProperties,
 
   header: {

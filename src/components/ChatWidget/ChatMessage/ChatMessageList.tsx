@@ -25,9 +25,15 @@ export const ChatMessageList = ({
       aria-relevant="additions"
       style={styles.message}
     >
-      {messages.map((msg) => (
-        <ChatMessageBubble key={msg.id} message={msg} style={props.style} />
-      ))}
+      {messages.length ? (
+        messages.map((msg) => (
+          <ChatMessageBubble key={msg.id} message={msg} style={props.style} />
+        ))
+      ) : (
+        <div style={{ height: '3em', textAlign: 'center' }}>
+          How can we help you?
+        </div>
+      )}
     </ul>
   )
 }
