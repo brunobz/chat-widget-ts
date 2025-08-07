@@ -1,4 +1,5 @@
 import { Send } from 'lucide-react'
+import { styles } from './ChatSubmitButton.styles'
 
 export const ChatSubmitButton = ({
   ...props
@@ -6,15 +7,15 @@ export const ChatSubmitButton = ({
   return (
     <button
       type="submit"
+      aria-label="send-message"
       disabled={props.disabled}
       aria-disabled={props.disabled}
       style={{
-        padding: '8px 12px 4px',
-        borderRadius: '20px',
-        border: 'none',
-        backgroundColor: props.disabled ? '#ccc' : '#6f33b7',
-        color: 'white',
-        fontWeight: 'bold',
+        ...styles.button,
+        backgroundColor: props.disabled
+          ? '#ccc'
+          : props.style?.backgroundColor || '#6f33b7',
+        color: props.style?.color || 'white',
         cursor: props.disabled ? 'not-allowed' : 'pointer',
       }}
     >

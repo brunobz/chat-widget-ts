@@ -1,15 +1,37 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-type ChatMessage = {
+export type ChatMessage = {
   id: string
   sender: 'user' | 'bot'
   content: string
 }
 
-export function useChatMessages() {
-  const [messages, setMessages] = useState<ChatMessage[]>([])
+const CHAT_STORAGE_KEY = 'chat_widget_messages'
 
-  function sendMessage(message: string) {
+export const useChatMessages = () => {
+  const [messages, setMessages] = useState<ChatMessage[]>([])
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  useEffect(() => {
+    const stored = localStorage.getItem(CHAT_STORAGE_KEY)
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored) as ChatMessage[]
+        setMessages(parsed)
+      } catch (err) {
+        console.warn('Erro ao fazer parse do localStorage', err)
+      }
+    }
+    setIsLoaded(true)
+  }, [])
+
+  useEffect(() => {
+    if (isLoaded) {
+      localStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(messages))
+    }
+  }, [messages, isLoaded])
+
+  const sendMessage = (message: string) => {
     const newMessage: ChatMessage = {
       id: crypto.randomUUID(),
       sender: 'user',

@@ -1,4 +1,5 @@
 import React from 'react'
+import { styles } from './ChatCloseButton.styles'
 
 interface ChatCloseButtonProps {
   onClose: () => void
@@ -12,12 +13,7 @@ export const ChatCloseButton = ({
     <button
       aria-label="Close chat"
       onClick={onClose}
-      style={{
-        background: 'transparent',
-        border: 'none',
-        fontSize: '1.2rem',
-        cursor: 'pointer',
-      }}
+      style={styles.button}
       {...props}
     >
       ×

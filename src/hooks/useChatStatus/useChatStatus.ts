@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export function useChatStatus() {
+export const useChatStatus = () => {
   const [isOnline, setIsOnline] = useState(true)
   const [isMaintenance, setIsMaintenance] = useState(false)
 

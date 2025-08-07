@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from 'react'
+import React, { CSSProperties, useEffect, useRef } from 'react'
 import { ChatStatus } from '../ChatStatus/ChatStatus'
 import { ChatBanner } from '../ChatBanner/ChatBanner'
 import { ChatMessageList } from '../ChatMessage/ChatMessageList'
 import { ChatForm } from '../ChatForm/ChatForm'
 import { ChatCloseButton } from '../ChatCloseButton/ChatCloseButton'
-import { EloquentIcon } from '@/components/ui/FloatingButton/icons/EloquentIcon'
+import { EloquentIcon } from '@/components/ui/icons/EloquentIcon'
+import { styles } from './ChatWindow.styles'
 
 interface Message {
   id: string
@@ -13,6 +14,7 @@ interface Message {
 }
 
 interface ChatWindowProps {
+  customStyle: CSSProperties
   isOnline: boolean
   isMaintenance: boolean
   messages: Message[]
@@ -21,6 +23,7 @@ interface ChatWindowProps {
 }
 
 export const ChatWindow: React.FC<ChatWindowProps> = ({
+  customStyle,
   isOnline,
   isMaintenance,
   messages,
@@ -30,7 +33,7 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    messagesEndRef.current?.scrollIntoView?.({ behavior: 'smooth' })
   }, [messages])
 
   useEffect(() => {
@@ -44,44 +47,15 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [onClose])
 
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    const form = e.target as HTMLFormElement
-    const input = form.elements.namedItem('chatInput') as HTMLInputElement
-    const value = input.value.trim()
-    if (!value || isMaintenance) return
-    onSendMessage(value)
-    input.value = ''
-  }
-
   return (
     <section
       role="dialog"
       aria-modal="true"
       aria-labelledby="chat-title"
       tabIndex={-1}
-      style={{
-        position: 'fixed',
-        bottom: '80px',
-        right: '20px',
-        width: '320px',
-        maxHeight: '480px',
-        backgroundColor: 'white',
-        boxShadow: '0 0 10px rgba(0,0,0,0.3)',
-        borderRadius: '8px',
-        display: 'flex',
-        flexDirection: 'column',
-      }}
+      style={styles.section}
     >
-      <header
-        style={{
-          padding: '10px',
-          borderBottom: '1px solid #ccc',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
+      <header style={styles.header}>
         <EloquentIcon color="#6f33b7" />
         <ChatCloseButton onClose={onClose} />
       </header>
@@ -92,18 +66,16 @@ export const ChatWindow: React.FC<ChatWindowProps> = ({
         <ChatBanner message="Sorry! Service in maintenance mode." />
       )}
 
-      <main
-        style={{
-          flex: 1,
-          overflowY: 'auto',
-          padding: '10px',
-        }}
-      >
-        <ChatMessageList messages={messages} />
+      <main style={styles.main}>
+        <ChatMessageList messages={messages} style={customStyle} />
         <div ref={messagesEndRef} />
       </main>
 
-      <ChatForm disabled={isMaintenance} onSubmit={handleSubmit} />
+      <ChatForm
+        disabled={isMaintenance}
+        onSubmitForm={onSendMessage}
+        style={customStyle}
+      />
     </section>
   )
 }

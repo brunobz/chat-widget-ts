@@ -1,17 +1,17 @@
 import { useState } from 'react'
 
-export function useChatVisibility(defaultOpen = false) {
+export const useChatVisibility = (defaultOpen = false) => {
   const [isOpen, setIsOpen] = useState(defaultOpen)
 
-  function toggle() {
+  const toggle = () => {
     setIsOpen((prev) => !prev)
   }
 
-  function open() {
+  const open = () => {
     setIsOpen(true)
   }
 
-  function close() {
+  const close = () => {
     setIsOpen(false)
   }
 

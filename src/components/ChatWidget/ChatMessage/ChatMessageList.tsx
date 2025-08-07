@@ -1,9 +1,12 @@
 import React from 'react'
 import { ChatMessageBubble } from './ChatMessageBubble'
+import { styles } from './ChatMessage.styles'
+
+export type sender = 'user' | 'bot'
 
 export interface Message {
   id: string
-  sender: 'user' | 'bot'
+  sender: sender
   content: string
 }
 
@@ -17,20 +20,13 @@ export const ChatMessageList = ({
 }: React.ComponentPropsWithRef<'ul'> & ChatMessageListProps) => {
   return (
     <ul
+      {...props}
       aria-live="polite"
       aria-relevant="additions"
-      style={{
-        listStyle: 'none',
-        margin: 0,
-        padding: 0,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '8px',
-      }}
-      {...props}
+      style={styles.message}
     >
       {messages.map((msg) => (
-        <ChatMessageBubble key={msg.id} message={msg} />
+        <ChatMessageBubble key={msg.id} message={msg} style={props.style} />
       ))}
     </ul>
   )

@@ -1,4 +1,5 @@
 import React from 'react'
+import { styles } from './ChatInput.styles'
 
 export const ChatInput = ({
   ...props
@@ -14,14 +15,7 @@ export const ChatInput = ({
           ? 'Chat unavailable during maintenance'
           : 'Type your message...'
       }
-      style={{
-        flex: 1,
-        padding: '8px 12px',
-        borderRadius: '20px',
-        border: '0.5px solid #ccc',
-        fontSize: '0.8rem',
-        marginRight: '8px',
-      }}
+      style={styles.input}
       {...props}
     />
   )

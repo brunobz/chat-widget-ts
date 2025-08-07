@@ -1,4 +1,5 @@
 import React from 'react'
+import { styles } from './ChatStatus.styles'
 
 interface ChatStatusProps {
   isOnline: boolean
@@ -15,13 +16,9 @@ export const ChatStatus = ({
       role="status"
       aria-live="polite"
       style={{
-        padding: '6px 10px',
-        fontSize: '0.9rem',
+        ...styles.status,
         color: isOnline && !isMaintenance ? 'green' : 'red',
         backgroundColor: isOnline && !isMaintenance ? '#e6ffed' : '#ffe6e6',
-        borderRadius: '4px',
-        margin: '0 10px 10px 10px',
-        userSelect: 'none',
       }}
       {...props}
     >
