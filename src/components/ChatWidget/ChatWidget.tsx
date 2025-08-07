@@ -5,7 +5,7 @@ import { useChatVisibility } from '@/hooks/useChatVisibility/useChatVisibility'
 import { FloatingButton } from '@/components/ui/FloatingButton/FloatingButton'
 import { ChatWindow } from './ChatWindow/ChatWindow'
 export interface ChatWidgetProps {
-  styles: {
+  styles?: {
     colors: {
       color: string
       backgroundColor: string
@@ -20,12 +20,6 @@ export const ChatWidget = ({ styles }: ChatWidgetProps) => {
   const { messages, sendMessage } = useChatMessages()
   const { isOpen, toggle, close } = useChatVisibility()
 
-  const {
-    container,
-    colors: { color, backgroundColor },
-    icon,
-  } = styles
-
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === 'Escape' && isOpen) {
@@ -38,17 +32,23 @@ export const ChatWidget = ({ styles }: ChatWidgetProps) => {
   }, [isOpen, close])
 
   return (
-    <div style={container}>
+    <div style={styles?.container}>
       <FloatingButton
-        icon={icon}
+        icon={styles?.icon}
         isOpen={isOpen}
         toggle={toggle}
-        style={{ color, backgroundColor }}
+        style={{
+          color: styles?.colors.color,
+          backgroundColor: styles?.colors.backgroundColor,
+        }}
       />
 
       {isOpen && (
         <ChatWindow
-          customStyle={{ color, backgroundColor }}
+          customStyle={{
+            color: styles?.colors.color,
+            backgroundColor: styles?.colors.backgroundColor,
+          }}
           status={status}
           messages={messages}
           onClose={close}

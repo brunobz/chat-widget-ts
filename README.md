@@ -18,12 +18,22 @@ npm install @brunobz/chat-widget-ts
 
 ## 🚀 Usage
 
-### Basic Setup
+### Basic Setup ES Modules
 
 ```tsx
-import { ChatWidget } from '@brunobz/chat-widget-ts'
+import { ChatWidget } from 'chat-widget-ts'
 
-export default function App() {
+function App() {
+  return <ChatWidget />
+}
+```
+
+### Basic Setup CommonJS
+
+```tsx
+const { ChatWidget } = require('chat-widget-ts')
+
+function App() {
   return <ChatWidget />
 }
 ```

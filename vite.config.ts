@@ -14,8 +14,8 @@ export default defineConfig({
     lib: {
       entry: 'src/index.ts',
       name: 'ChatWidget',
-      fileName: () => `index.js`,
-      formats: ['es'],
+      fileName: (format) => `index.${format}.js`,
+      formats: ['es', 'cjs'],
     },
     outDir: 'dist',
     rollupOptions: {
