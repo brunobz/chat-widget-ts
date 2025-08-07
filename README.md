@@ -73,19 +73,19 @@ They are restored on page reload. Great for prototyping and offline UX.
 
 You can simulate different chat statuses during development using the browser's localStorage. This is helpful for testing how the widget behaves in various scenarios (e.g. offline, maintenance).
 
-## Key:
+Key:
 
 ```bash
 chat-status
 ```
 
-## Available values:
+Available values:
 
 - online (default)
 - offline
 - maintenance
 
-## Example (in browser console):
+Example (in browser console):
 
 ```js
 localStorage.setItem('chat-status', 'maintenance')
